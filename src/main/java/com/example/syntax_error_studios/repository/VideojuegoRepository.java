@@ -43,6 +43,11 @@ public interface VideojuegoRepository extends JpaRepository<Videojuego, Long> {
     )
     List <Videojuego> buscarPorConsola(@Param("texto")String texto);
 
-    
+    //Buscar por precio
+    @Query(
+        value = "SELECT * FROM videojuegos WHERE precio_videojuego = :precio",
+        nativeQuery = true
+    )
+    List <Videojuego> buscarPorPrecio(@Param("precio")int precio);
 
 }
