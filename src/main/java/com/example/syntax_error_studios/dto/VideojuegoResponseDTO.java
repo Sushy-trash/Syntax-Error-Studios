@@ -2,9 +2,6 @@ package com.example.syntax_error_studios.dto;
 
 import java.math.BigDecimal;
 
-import com.example.syntax_error_studios.model.Consola;
-import com.example.syntax_error_studios.model.Genero;
-import com.example.syntax_error_studios.model.Modalidad;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
