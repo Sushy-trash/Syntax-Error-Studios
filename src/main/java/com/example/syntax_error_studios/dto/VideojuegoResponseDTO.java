@@ -1,7 +1,5 @@
 package com.example.syntax_error_studios.dto;
 
-import java.math.BigDecimal;
-
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +14,7 @@ public class VideojuegoResponseDTO {
     private Long id;
     private String nombreVideojuego;
     private String ean;
-    private BigDecimal precioVideojuego;
+    private int precioVideojuego;
     private String estado;
 
     //llamado de consola solo nombre de la consola
