@@ -63,4 +63,11 @@ public interface VideojuegoRepository extends JpaRepository<Videojuego, Long> {
     )
     List <Videojuego> buscarPorModalidad(@Param("texto")String texto);
 
+    //Buscar por estado
+    @Query(
+        value = "SELECT * FROM videojuegos WHERE estado LIKE CONCAT ('%', :texto, '%')",
+        nativeQuery = true
+    )
+    List <Videojuego> buscarPorEstado(@Param("texto")String texto);
+
 }
