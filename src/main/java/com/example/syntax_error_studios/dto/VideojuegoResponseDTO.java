@@ -19,11 +19,11 @@ public class VideojuegoResponseDTO {
     private BigDecimal precioVideojuego;
     private String estado;
 
-    //llamado de consola
+    //llamado de consola solo nombre de la consola
     private  String nombreConsola;
-    //llamado de el nombre del genero
+    //llamado de genero, solo el nombre del genero
     private String nombreGenero;
-    //llamado de la modalidad
+    //llamado de la modalidad pero solo el e nombre de la modalidad
     private String nombreModalidad;
 
 }
