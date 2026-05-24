@@ -27,9 +27,9 @@ public class Videojuego {
     private String nombreVideojuego;
 
     @NotBlank(message="El codigo EAN del videojuego es obligatorio")
-    @Column(nullable=false, unique=true)
     @Size(max=13,message="El codigo EAN del videojuego no puede tener mas de 13 caracteres")
-    private int ean;
+    @Column(nullable=false,length=13,unique=true)
+    private String ean;
 
     @NotNull(message="La consola para la cual está orientada el videojuego es obligatoria")
     @ManyToOne
