@@ -25,5 +25,5 @@ public class Genero {
     @NotBlank(message="El nombre del genero es obligatorio")
     @Size(max=100,message="El nombre del genero no puede tener mas de 100 carateres")
     @Column(nullable=false,length=100)
-    private String nombre;
+    private String nombreGenero;
 }
