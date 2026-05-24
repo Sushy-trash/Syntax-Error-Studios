@@ -50,4 +50,17 @@ public interface VideojuegoRepository extends JpaRepository<Videojuego, Long> {
     )
     List <Videojuego> buscarPorPrecio(@Param("precio")int precio);
 
+    //Buscar por modalidad
+    @Query(
+        value = """
+                SELECT v.*
+                FROM videojuegos v
+                INNER JOIN modalidades m
+                    ON v.modalidad_id = m.id
+                WHERE m.nombre_modalidad LIKE CONCAT ('%',:texto,'%')
+                """,
+                nativeQuery = true
+    )
+    List <Videojuego> buscarPorModalidad(@Param("texto")String texto);
+
 }
