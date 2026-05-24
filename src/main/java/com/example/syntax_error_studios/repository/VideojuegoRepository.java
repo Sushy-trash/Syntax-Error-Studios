@@ -30,4 +30,19 @@ public interface VideojuegoRepository extends JpaRepository<Videojuego, Long> {
     )
     List <Videojuego> buscarPorGenero(@Param("texto")String texto);
 
+    //Buscar por consola
+    @Query(
+        value = """
+                SELECT v.*
+                FROM videojuegos v
+                INNER JOIN consolas c
+                    ON v.consola_id = c.id
+                WHERE c.nombre_consola LIKE CONCAT ('%',:texto,'%')
+                """,
+                nativeQuery = true
+    )
+    List <Videojuego> buscarPorConsola(@Param("texto")String texto);
+
+    
+
 }
