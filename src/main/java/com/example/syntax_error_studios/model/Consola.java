@@ -25,9 +25,4 @@ public class Consola {
     @Column(nullable=false,length=100,unique =true)
     private String SKU;
 
-    @NotNull(message="El precio de la consola es obligatorio")
-    @Positive(message="El precio de la consola debe ser un valor positivo")
-    @Column(nullable = false,precision = 10,scale=2)
-    private int precioConsola;
-
 }
