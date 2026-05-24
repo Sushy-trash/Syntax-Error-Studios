@@ -70,4 +70,11 @@ public interface VideojuegoRepository extends JpaRepository<Videojuego, Long> {
     )
     List <Videojuego> buscarPorEstado(@Param("texto")String texto);
 
+    //Buscar por EAN
+    @Query(
+        value = "SELECT * FROM videojuegos WHERE ean LIKE CONCAT ('%', :texto, '%')",
+        nativeQuery = true
+    )
+    List <Videojuego> buscarPorEan(@Param("texto")String texto);
+
 }
