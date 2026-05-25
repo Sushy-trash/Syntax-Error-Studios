@@ -32,8 +32,8 @@ public class VideojuegoController {
     }
 
     @PostMapping
-    public ResponseEntity<VideojuegoResponseDTO> crear(@Valid @RequestBody VideojuegoResponseDTO videojuego) {
-        return ResponseEntity.status(201).body(videojuego);
+    public ResponseEntity<VideojuegoResponseDTO> crear(@Valid @RequestBody VideojuegoRequestDTO videojuego) {
+        return ResponseEntity.status(201).body(videojuegoService.guardar(videojuego));
     }
 
     @PutMapping("/{id}")

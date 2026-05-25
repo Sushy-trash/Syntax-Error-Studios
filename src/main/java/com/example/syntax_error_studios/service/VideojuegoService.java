@@ -36,8 +36,6 @@ public class VideojuegoService {
         dto.setId(videojuego.getId());
         dto.setNombreVideojuego(videojuego.getNombreVideojuego());
         dto.setEan(videojuego.getEan());
-        dto.setPrecioVideojuego(videojuego.getPrecioVideojuego());
-        dto.setEstado(videojuego.getEstado());
 
         dto.setNombreConsola(
             videojuego.getConsola().getNombreConsola()
@@ -50,6 +48,8 @@ public class VideojuegoService {
         dto.setNombreModalidad(
             videojuego.getModalidad().getNombreModalidad()
         );
+        dto.setPrecioVideojuego(videojuego.getPrecioVideojuego());
+        dto.setEstado(videojuego.getEstado());
 
         return dto;
     }
@@ -83,19 +83,20 @@ public class VideojuegoService {
             .findById(dto.getModalidadId())
             .orElseThrow();
 
-        Videojuego videojuego = new Videojuego(
-            null,
-            dto.getNombreVideojuego(),
-            dto.getEan(),
-            consola,
-            genero,
-            modalidad,
-            dto.getPrecioVideojuego(),
-            dto.getEstado()
-        );
+        Videojuego videojuego = new Videojuego();
+
+        videojuego.setNombreVideojuego(dto.getNombreVideojuego());
+        videojuego.setEan(dto.getEan());
+        videojuego.setConsola(consola);
+        videojuego.setGenero(genero);
+        videojuego.setModalidad(modalidad);
+        videojuego.setPrecioVideojuego(dto.getPrecioVideojuego());
+        videojuego.setEstado(dto.getEstado());
 
         Videojuego guardado = videojuegoRepository.save(videojuego);
 
+        System.out.println("ID GUARDADO: " + guardado.getId());
+        
         return mapToDTO(guardado);
     }
 

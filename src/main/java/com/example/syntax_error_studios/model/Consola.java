@@ -23,6 +23,6 @@ public class Consola {
 
     @NotBlank(message="EL codigo SKU de la consola es obligatorio")
     @Column(nullable=false,length=100,unique =true)
-    private String SKU;
+    private String sku;
 
 }
