@@ -42,7 +42,7 @@ public class VideojuegoController {
             @Valid @RequestBody VideojuegoRequestDTO datos) {
         return videojuegoService.obtenerPorId(id)
                 .map(existente -> {
-                    return ResponseEntity.ok(videojuegoService.guardar(datos));
+                    return ResponseEntity.ok(videojuegoService.actualizar(id, datos));
                 })
                 .orElse(ResponseEntity.notFound().build());
     }

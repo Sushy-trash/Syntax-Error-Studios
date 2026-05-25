@@ -96,8 +96,41 @@ public class VideojuegoService {
         Videojuego guardado = videojuegoRepository.save(videojuego);
 
         System.out.println("ID GUARDADO: " + guardado.getId());
-        
+
         return mapToDTO(guardado);
+    }
+
+    //Método actualizar
+    public VideojuegoResponseDTO actualizar(Long id, VideojuegoRequestDTO dto){
+
+        Videojuego videojuego = videojuegoRepository
+            .findById(id)
+            .orElseThrow();
+
+        Consola consola = consolaRepository
+            .findById(dto.getConsolaId())
+            .orElseThrow();
+
+        Genero genero = generoRepository
+            .findById(dto.getGeneroId())
+            .orElseThrow();
+
+        Modalidad modalidad = modalidadRepository
+            .findById(dto.getModalidadId())
+            .orElseThrow();
+
+        videojuego.setNombreVideojuego(dto.getNombreVideojuego());
+        videojuego.setEan(dto.getEan());
+        videojuego.setPrecioVideojuego(dto.getPrecioVideojuego());
+        videojuego.setEstado(dto.getEstado());
+
+        videojuego.setConsola(consola);
+        videojuego.setGenero(genero);
+        videojuego.setModalidad(modalidad);
+
+        Videojuego actualizado = videojuegoRepository.save(videojuego);
+
+        return mapToDTO(actualizado);
     }
 
     //Eliminar videojuego
