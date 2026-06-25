@@ -1,6 +1,7 @@
 package com.example.syntax_error_studios.dto;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-
+@Schema(description = "Respuesta con la información de un videojuego")
 public class VideojuegoResponseDTO {
     private Long id;
     private String nombreVideojuego;

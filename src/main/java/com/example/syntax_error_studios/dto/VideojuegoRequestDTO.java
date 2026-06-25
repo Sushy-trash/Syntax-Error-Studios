@@ -29,7 +29,7 @@ public class VideojuegoRequestDTO {
 
     @Schema(
         description = "El precio del videojuego",
-        example = "$59.990"
+        example = "59990"
     )
     @NotNull(message="El precio del videojuego es obligatorio") 
     @Positive(message="El precio del videojuego debe ser un valor mayor a 0")   
