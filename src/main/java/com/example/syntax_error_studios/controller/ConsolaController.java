@@ -86,7 +86,17 @@ private final ConsolaService consolaService;
                 .body(nuevaConsola);
     }
 
-    // PUT -> actualizar consola
+    // PUT -> actualizar consola + documentacion
+    @Operation(
+        summary = "Actualizar consola",
+        description = "Actualiza la información de una consola existente"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consola actualizado"),
+        @ApiResponse(responseCode = "404", description = "Consola no encontrado")
+    })
+
+
     @PutMapping("/{id}")
     public ResponseEntity<Consola> actualizar(
             @PathVariable Long id,
@@ -104,7 +114,16 @@ private final ConsolaService consolaService;
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // DELETE -> eliminar consola
+    // DELETE -> eliminar consola + documentacion
+    @Operation(
+        summary = "Eliminar consola",
+        description = "Elimina una consola   según su ID"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Consola eliminada"),
+        @ApiResponse(responseCode = "404", description = "Consola no encontrada")
+    })
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
 
