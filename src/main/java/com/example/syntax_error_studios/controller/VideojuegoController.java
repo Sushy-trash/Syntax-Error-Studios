@@ -43,7 +43,7 @@ public class VideojuegoController {
     public ResponseEntity<List<VideojuegoResponseDTO>> obtenerTodos() {
         return ResponseEntity.ok(videojuegoService.obtenerTodos());
     }
-    //obtener por di + documentacion
+    //obtener por id + documentacion
     @Operation(
         summary = "Buscar videojuego por ID",
         description = "Obtiene un videojuego según su identificador"
@@ -53,7 +53,7 @@ public class VideojuegoController {
         @ApiResponse(responseCode = "404", description = "Videojuego no encontrado")
     })
 
-
+    
     @GetMapping("/{id}")
     public ResponseEntity<VideojuegoResponseDTO> obtenerPorId(@PathVariable Long id) {
         return videojuegoService.obtenerPorId(id)
@@ -105,6 +105,7 @@ public class VideojuegoController {
         @ApiResponse(responseCode = "204", description = "Videojuego eliminado"),
         @ApiResponse(responseCode = "404", description = "Videojuego no encontrado")
     })
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         if(videojuegoService.obtenerPorId(id).isEmpty()){
@@ -114,55 +115,140 @@ public class VideojuegoController {
         return ResponseEntity.noContent().build();
     }
 
-    //Buscar por nombre de videojuego
+    //Buscar por nombre de videojuego + documentacion
+    @Operation(
+        summary = "Buscar videojuegos por nombre",
+        description = "Obtiene videojuegos cuyo nombre coincida con el valor ingresado"
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "Búsqueda realizada correctamente"
+    )
+
     @GetMapping("/nombre")
     public ResponseEntity<List<VideojuegoResponseDTO>> buscarPorNombre(@RequestParam String nombre) {
         return ResponseEntity.ok(videojuegoService.buscarPorNombre(nombre));
     }
 
-    //Buscar por género de videojuego
+    //Buscar por género de videojuego+ documentacion
+    @Operation(
+        summary = "Buscar videojuegos por género",
+        description = "Obtiene videojuegos asociados a un género específico"
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "Búsqueda realizada correctamente"
+    )
+
     @GetMapping("/genero")
     public ResponseEntity<List<VideojuegoResponseDTO>> buscarPorGenero(@RequestParam String genero) {
         return ResponseEntity.ok(videojuegoService.buscarPorGenero(genero));
     }
 
-    //Buscar por consola
+
+    //Buscar por consola+documentacion
+    @Operation(
+        summary = "Buscar videojuegos por consola",
+        description = "Obtiene videojuegos asociados a una consola específica"
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "Búsqueda realizada correctamente"
+    )
+
+
     @GetMapping("/consola")
     public ResponseEntity<List<VideojuegoResponseDTO>> buscarPorConsola(@RequestParam String consola) {
         return ResponseEntity.ok(videojuegoService.buscarPorConsola(consola));
     }
 
-    //Buscar por precio
+    //Buscar por precio+documentacion
+    @Operation(
+        summary = "Buscar videojuegos por precio exacto",
+        description = "Obtiene videojuegos con el precio indicado"
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "Búsqueda realizada correctamente"
+    )
+
     @GetMapping("/precio")
     public ResponseEntity<List<VideojuegoResponseDTO>> buscarPorPrecio(@RequestParam int precio) {
         return ResponseEntity.ok(videojuegoService.buscarPorPrecio(precio));
     }
 
-    //Buscar por modalidad
+    //Buscar por modalidad+documentacion
+    @Operation(
+        summary = "Buscar videojuegos por modalidad",
+        description = "Obtiene videojuegos según su modalidad"
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "Búsqueda realizada correctamente"
+    )
+
+
     @GetMapping("/modalidad")
     public ResponseEntity<List<VideojuegoResponseDTO>> buscarPorModalidad(@RequestParam String modalidad) {
         return ResponseEntity.ok(videojuegoService.buscarPorModalidad(modalidad));
     }
 
-    //Buscar por estado
+    //Buscar por estado + documentacion
+    @Operation(
+        summary = "Buscar videojuegos por estado",
+        description = "Obtiene videojuegos según su estado"
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "Búsqueda realizada correctamente"
+    )
+
     @GetMapping("/estado")
     public ResponseEntity<List<VideojuegoResponseDTO>> buscarPorEstado(@RequestParam String estado) {
         return ResponseEntity.ok(videojuegoService.buscarPorEstado(estado));
     }
 
-    //Buscar por EAN
+    //Buscar por EAN + documentacion
+    @Operation(
+        summary = "Buscar videojuegos por EAN",
+        description = "Obtiene videojuegos según el código EAN"
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "Búsqueda realizada correctamente"
+    )
+
     @GetMapping("/ean")
     public ResponseEntity<List<VideojuegoResponseDTO>> buscarPorEAN(@RequestParam String ean) {
         return ResponseEntity.ok(videojuegoService.buscarPorEAN(ean));
     }
 
-    //Buscar por precio menor o igual
+    //Buscar por precio menor o igual + documentacion
+    @Operation(
+        summary = "Buscar videojuegos con precio menor o igual",
+        description = "Obtiene videojuegos cuyo precio es menor o igual al valor indicado"
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "Búsqueda realizada correctamente"
+    )
+
     @GetMapping("/precio-menor")
     public ResponseEntity<List<VideojuegoResponseDTO>> buscarPorPrecioMenor(@RequestParam int precio) {
         return ResponseEntity.ok(videojuegoService.buscarPorPrecioMenor(precio));
     }
 
-    //Buscar por precio mayor o igual
+
+    //Buscar por precio mayor o igual + documentacion
+    @Operation(
+        summary = "Buscar videojuegos con precio mayor o igual",
+        description = "Obtiene videojuegos cuyo precio es mayor o igual al valor indicado"
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "Búsqueda realizada correctamente"
+    )
+
     @GetMapping("/precio-mayor")
     public ResponseEntity<List<VideojuegoResponseDTO>> buscarPorPrecioMayor(@RequestParam int precio) {
         return ResponseEntity.ok(videojuegoService.buscarPorPrecioMayor(precio));
