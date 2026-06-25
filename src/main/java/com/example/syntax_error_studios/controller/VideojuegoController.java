@@ -9,20 +9,50 @@ import com.example.syntax_error_studios.dto.VideojuegoRequestDTO;
 import com.example.syntax_error_studios.dto.VideojuegoResponseDTO;
 import com.example.syntax_error_studios.service.VideojuegoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+
+//documentacion para controlador de VideoJuego
+@Tag(
+    name = "Videojuegos",
+    description = "Administración y búsqueda de videojuegos"
+)
 @RestController
 @RequestMapping("/api/videojuegos")
 @RequiredArgsConstructor
 public class VideojuegoController {
 
     private final VideojuegoService videojuegoService;
+    //Obtener todos los videojuegos + documentacion 
+    @Operation(
+        summary = "Obtener todos los videojuegos",
+        description = "Retorna una lista de todos los videojuegos registrados"
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "Lista obtenida correctamente"
+    )
+
 
     @GetMapping
     public ResponseEntity<List<VideojuegoResponseDTO>> obtenerTodos() {
         return ResponseEntity.ok(videojuegoService.obtenerTodos());
     }
+    //obtener por di + documentacion
+    @Operation(
+        summary = "Buscar videojuego por ID",
+        description = "Obtiene un videojuego según su identificador"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Videojuego encontrado"),
+        @ApiResponse(responseCode = "404", description = "Videojuego no encontrado")
+    })
+
 
     @GetMapping("/{id}")
     public ResponseEntity<VideojuegoResponseDTO> obtenerPorId(@PathVariable Long id) {
@@ -30,11 +60,31 @@ public class VideojuegoController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    //crear videojuego + documentacion
+    @Operation(
+        summary = "Crear videojuego",
+        description = "Registra un nuevo videojuego"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Videojuego creado correctamente"),
+        @ApiResponse(responseCode = "400", description = "Datos inválidos")
+    })
+
 
     @PostMapping
     public ResponseEntity<VideojuegoResponseDTO> crear(@Valid @RequestBody VideojuegoRequestDTO videojuego) {
         return ResponseEntity.status(201).body(videojuegoService.guardar(videojuego));
     }
+    //agregar -> actualizar
+    @Operation(
+        summary = "Actualizar videojuego",
+        description = "Actualiza la información de un videojuego existente"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Videojuego actualizado"),
+        @ApiResponse(responseCode = "404", description = "Videojuego no encontrado")
+    })
+
 
     @PutMapping("/{id}")
     public ResponseEntity<VideojuegoResponseDTO> actualizar(
@@ -46,7 +96,15 @@ public class VideojuegoController {
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
-
+    // eliminar + documentacion
+    @Operation(
+        summary = "Eliminar videojuego",
+        description = "Elimina un videojuego según su ID"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Videojuego eliminado"),
+        @ApiResponse(responseCode = "404", description = "Videojuego no encontrado")
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         if(videojuegoService.obtenerPorId(id).isEmpty()){

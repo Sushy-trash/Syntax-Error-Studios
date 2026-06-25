@@ -16,22 +16,49 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.syntax_error_studios.model.Consola;
 import com.example.syntax_error_studios.service.ConsolaService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-
+// adicionando la documentacion para controlador Consola
+@Tag(
+    name = "Consolas",
+    description = "Operaciones relacionadas con las consolas"
+)
 @RestController
 @RequestMapping("/api/consolas")
 @RequiredArgsConstructor
 
+
 public class ConsolaController {
 private final ConsolaService consolaService;
 
-    // GET -> listar todas las consolas
+    // GET -> listar todas las consolas + la documentacion 
+    @Operation(
+        summary = "Obtener todas las consolas",
+        description = "Retorna una lista con todas las consolas registradas"
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "Lista obtenida correctamente"
+    )
+
     @GetMapping
     public List<Consola> obtenerTodas() {
         return consolaService.obtenerTodas();
     }
 
-    // GET -> buscar consola por id
+    // GET -> buscar consola por id+la adicion de su documentacion
+    @Operation(
+        summary = "Buscar consola por ID",
+        description = "Obtiene una consola según su identificador"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consola encontrada"),
+        @ApiResponse(responseCode = "404", description = "Consola no encontrada")
+    })
+
     @GetMapping("/{id}")
     public ResponseEntity<Consola> obtenerPorId(@PathVariable Long id) {
 
@@ -40,7 +67,16 @@ private final ConsolaService consolaService;
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // POST -> crear consola
+    // POST -> crear consola + la adicion de la operation
+    @Operation(
+        summary = "Crear consola",
+        description = "Registra una nueva consola"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Consola creada"),
+        @ApiResponse(responseCode = "400", description = "Datos inválidos")
+    })
+
     @PostMapping
     public ResponseEntity<Consola> guardar(@RequestBody Consola consola) {
 
